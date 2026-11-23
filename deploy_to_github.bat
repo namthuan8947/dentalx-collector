@@ -1,34 +1,27 @@
 @echo off
-chcp 65001 >nul
+title DentalX GitHub Push
+cd /d "%~dp0"
 echo ========================================================
-echo    HỆ THỐNG ĐẨY WEB FORM LÊN GITHUB PAGES TỰ ĐỘNG
+echo DENTALX COLLECTOR - DONG BO LEN GITHUB
 echo ========================================================
 echo.
-set /p REPO_URL="Nhập URL repository GitHub của bạn (VD: https://github.com/username/dentalx-form.git): "
-if "%REPO_URL%"=="" (
-    echo Chưa nhập URL! Thoát...
-    pause
-    exit /b
-)
 
-cd /d "%~dp0"
-if not exist ".git" (
+git status >nul 2>&1
+if errorlevel 1 (
     git init
     git branch -M main
+    git remote add origin https://github.com/namthuan8947/dentalx-collector.git
 )
-git remote remove origin 2>nul
-git remote add origin %REPO_URL%
+
 git add .
-git commit -m "Initial commit DentalX collector web app"
-git push -u origin main --force
+git commit -m "Update DentalX collector form"
+git push origin main
 
 echo.
 echo ========================================================
-echo ĐÃ PUSH CODE LÊN GITHUB THÀNH CÔNG!
-echo.
-echo Bước tiếp theo:
-echo 1. Vào repository trên GitHub -> Settings -> Pages.
-echo 2. Chọn Branch: 'main', Folder: '/(root)' -> Nhấn Save.
-echo 3. Chờ 30 giây là trang web sẽ hoạt động online!
+echo DONG BO LEN GITHUB THANH CONG!
+echo Link repo: https://github.com/namthuan8947/dentalx-collector
+echo Link web:  https://namthuan8947.github.io/dentalx-collector/
 echo ========================================================
+echo.
 pause
